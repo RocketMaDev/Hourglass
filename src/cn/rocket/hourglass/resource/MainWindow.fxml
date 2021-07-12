@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="cn.rocket.hourglass.main.MainWindow"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.text.Font?>
 
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.rocket.hourglass.main.MainWindow">
+    <Label alignment="CENTER" contentDisplay="CENTER" text="15.000" AnchorPane.leftAnchor="41.0"
+           AnchorPane.rightAnchor="41.0" AnchorPane.topAnchor="51.0">
+        <font>
+            <Font size="100.0"/>
+        </font>
+    </Label>
+    <JFXButton buttonType="RAISED" layoutX="90.0" layoutY="312.0" ripplerFill="BLACK" text="开始"
+               AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0">
+        <font>
+            <Font size="66.0"/>
+        </font>
+    </JFXButton>
 </AnchorPane>
