@@ -6,8 +6,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.concurrent.locks.LockSupport;
 
 /**
@@ -19,8 +25,38 @@ import java.util.concurrent.locks.LockSupport;
 public class MainWindow {
     private static final ImageView PAUSE_IMAGE_VIEW = new ImageView(new Image(StaticVariables.PAUSE));
     private static final ImageView START_IMAGE_VIEW = new ImageView(new Image(StaticVariables.START));
+
+    private static final Image SPRING = new Image(StaticVariables.SPRING);
+    private static final Image FLOWER = new Image(StaticVariables.FLOWER);
+    private static final Image AUTUMN = new Image(StaticVariables.AUTUMN);
+    private static final Image MOON = new Image(StaticVariables.MOON);
+    private static final Image RIVER = new Image(StaticVariables.RIVER);
+    private static final Image CLOUD = new Image(StaticVariables.CLOUD);
+
     @FXML
-    ImageView mainbg;
+    GridPane gridPane;
+    @FXML
+    JFXButton cloud;
+    @FXML
+    JFXButton river;
+    @FXML
+    JFXButton autumn;
+    @FXML
+    JFXButton moon;
+    @FXML
+    JFXButton flower;
+    @FXML
+    JFXButton spring;
+    @FXML
+    Label copyright;
+    @FXML
+    ImageView bg;
+    @FXML
+    JFXButton fullscreenBtn;
+    @FXML
+    AnchorPane mainPane;
+    @FXML
+    ImageView nextPage;
     @FXML
     JFXButton pause;
     @FXML
@@ -50,8 +86,9 @@ public class MainWindow {
     }
 
     @FXML
-    void nextPage() {
-        mainbg.setVisible(false);
+    void nextPageM() {
+        nextPage.setVisible(false);
+        start.requestFocus();
     }
 
     @FXML
@@ -108,6 +145,80 @@ public class MainWindow {
         timingThread.start();
     }
 
+    @FXML
+    void fullscreenM() {
+        fullscreenBtn.setVisible(false);
+        mainPane.setVisible(true);
+        Main.stage.setFullScreen(true);
+        double width = Main.stage.getWidth();
+        double height = Main.stage.getHeight();
+        nextPage.setFitWidth(width);
+        nextPage.setFitHeight(height);
+        bg.setFitWidth(width);
+        bg.setFitHeight(height);
+        gridPane.setLayoutX((width - gridPane.getWidth()) / 2);
+        start.setLayoutX((width - start.getWidth()) / 2);
+
+        double limitedWidth = width - 2 * 380;
+        double spaceWidth = (limitedWidth - 6 * spring.getWidth())/5;
+        spring.setLayoutX(380);
+        flower.setLayoutX(380+spring.getWidth()+spaceWidth);
+        autumn.setLayoutX(380+2*(spring.getWidth()+spaceWidth));
+        moon.setLayoutX(380+3*(spring.getWidth()+spaceWidth));
+        river.setLayoutX(380+4*(spring.getWidth()+spaceWidth));
+        cloud.setLayoutX(380+5*(spring.getWidth()+spaceWidth));
+    }
+
+    @FXML
+    void openLink() {
+        if (Desktop.isDesktopSupported())
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/RocketMaDev/Hourglass"));
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
+    }
+
+    @FXML
+    void springM() {
+        bg.setImage(SPRING);
+    }
+
+    @FXML
+    void flowerM() {
+        bg.setImage(FLOWER);
+    }
+
+    @FXML
+    void autumnM() {
+        bg.setImage(AUTUMN);
+    }
+
+    @FXML
+    void moonM() {
+        bg.setImage(MOON);
+    }
+
+    @FXML
+    void riverM() {
+        bg.setImage(RIVER);
+    }
+
+    @FXML
+    void cloudM() {
+        bg.setImage(CLOUD);
+    }
+
+    @FXML
+    void returnFullScreen() {
+        Main.stage.setFullScreen(true);
+    }
+
+    @FXML
+    void showBg() {
+        nextPage.setVisible(true);
+    }
+
     private class Target implements Runnable {
 
         @Override
@@ -129,7 +240,8 @@ public class MainWindow {
                     int finalI = i;
                     if (!timing)
                         return;
-                    Thread.sleep(1);
+                    if (i % 3 != 0)
+                        Thread.sleep(1);
                     Platform.runLater(() -> lb.setText(String.format("%d.%03d", finalI / 1000, finalI % 1000)));
                     if (pauseB)
                         LockSupport.park();

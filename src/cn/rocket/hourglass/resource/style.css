@@ -2,5 +2,45 @@
      -jfx-button-type: RAISED;
      -fx-background-color: dodgerblue;
      -fx-text-fill: white;
-     -fx-font-size: 66;
+     -fx-font-size: 50;
+}
+
+#lb {
+    -fx-font-size: 200;
+}
+
+#spring {
+    -jfx-button-type: RAISED;
+    -fx-background-color: "#6bda6a";
+    -fx-text-fill: "#3c3c3c";
+}
+
+#flower {
+    -jfx-button-type: RAISED;
+    -fx-background-color: "#ffa0da";
+    -fx-text-fill: "#3c3c3c";
+}
+
+#autumn {
+     -jfx-button-type: RAISED;
+     -fx-background-color: "#ffe46c";
+     -fx-text-fill: "#3c3c3c";
+}
+
+#moon {
+     -jfx-button-type: RAISED;
+     -fx-background-color: "#fffcae";
+     -fx-text-fill: "#3c3c3c";
+}
+
+#river {
+     -jfx-button-type: RAISED;
+     -fx-background-color: "#b0e49f";
+     -fx-text-fill: "#3c3c3c";
+}
+
+#cloud {
+     -jfx-button-type: RAISED;
+     -fx-background-color: "#a7deff";
+     -fx-text-fill: "#3c3c3c";
 }
