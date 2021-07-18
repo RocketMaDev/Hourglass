@@ -1,0 +1,6 @@
+.jfx-button {
+     -jfx-button-type: RAISED;
+     -fx-background-color: dodgerblue;
+     -fx-text-fill: white;
+     -fx-font-size: 66;
+}

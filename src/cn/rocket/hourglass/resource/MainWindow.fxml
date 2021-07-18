@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="cn.rocket.hourglass.main.MainWindow"
-            prefHeight="400.0" prefWidth="600.0">
-
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="670.0" prefWidth="1200.0"
+            xmlns="http://javafx.com/javafx/8.0.171" fx:controller="cn.rocket.hourglass.main.MainWindow">
+   <Label fx:id="lb" alignment="CENTER" layoutX="402.0" layoutY="281.0" text="15.000" AnchorPane.bottomAnchor="230.0"
+          AnchorPane.leftAnchor="402.0" AnchorPane.rightAnchor="401.0">
+      <font>
+         <Font size="125.0"/>
+      </font>
+   </Label>
+   <JFXButton fx:id="start" alignment="CENTER" layoutX="318.0" layoutY="489.0" maxHeight="128.0" maxWidth="564.0"
+              onAction="#startM" prefHeight="128.0" prefWidth="564.0" stylesheets="@style.css" text="s"
+              AnchorPane.bottomAnchor="53.0"/>
+   <JFXButton fx:id="stop" alignment="CENTER" layoutX="319.0" layoutY="489.0" maxWidth="188.0" onAction="#stopM"
+              prefHeight="128.0" prefWidth="180.0" stylesheets="@style.css" text="t" visible="false"
+              AnchorPane.bottomAnchor="53.0"/>
+   <JFXButton fx:id="pause" alignment="CENTER" layoutX="511.0" layoutY="489.0" maxWidth="188.0" onAction="#pauseM"
+              prefHeight="128.0" prefWidth="180.0" stylesheets="@style.css" text="p" visible="false"
+              AnchorPane.bottomAnchor="53.0"/>
+   <JFXButton fx:id="restart" alignment="CENTER" layoutX="702.0" layoutY="489.0" maxWidth="188.0" onAction="#restartM"
+              prefHeight="128.0" prefWidth="180.0" stylesheets="@style.css" text="r" visible="false"
+              AnchorPane.bottomAnchor="53.0"/>
+   <ImageView fx:id="mainbg" fitHeight="900.0" fitWidth="1600.0" onMouseClicked="#nextPage" pickOnBounds="true"
+              preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Image url="@bg/bg.png"/>
+   </ImageView>
 </AnchorPane>
