@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Hourglass:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Hourglass_jar</output-path>
+    <root id="archive" name="Hourglass.jar">
+      <element id="module-output" name="Hourglass" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jfoenix-8.0.10.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

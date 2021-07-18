@@ -31,7 +31,7 @@ public class MainWindow {
     private static final Image AUTUMN = new Image(StaticVariables.AUTUMN);
     private static final Image MOON = new Image(StaticVariables.MOON);
     private static final Image RIVER = new Image(StaticVariables.RIVER);
-    private static final Image CLOUD = new Image(StaticVariables.CLOUD);
+    private static final Image CLOUD = new Image(StaticVariables.insider ? StaticVariables.CLOUD : StaticVariables.CLOUD_ORIGINAL);
 
     @FXML
     GridPane gridPane;
@@ -222,14 +222,13 @@ public class MainWindow {
     private class Target implements Runnable {
         private long endMillis;
         private long currentMillis;
-        private long distance;
 
         private boolean sleep() throws InterruptedException {
             if (!timing)
                 return true;
             Thread.sleep(1);
             if (pauseB) {
-                distance = endMillis - currentMillis;
+                long distance = endMillis - currentMillis;
                 LockSupport.park();
                 endMillis = System.currentTimeMillis() + distance;
             }

@@ -5,6 +5,8 @@ package cn.rocket.hourglass.main;
  * @version 1.0
  */
 public class StaticVariables {
+    static boolean insider;
+
     static final String MainWindowFXML = "/cn/rocket/hourglass/resource/MainWindow.fxml";
     static final String ICON_PACKAGE = "/cn/rocket/hourglass/resource/icon/";
     static final String BACKGROUND_PACKAGE = "cn/rocket/hourglass/resource/bg/";
@@ -21,4 +23,5 @@ public class StaticVariables {
     static final String MOON = BACKGROUND_PACKAGE + "moon.png";
     static final String RIVER = BACKGROUND_PACKAGE + "river.png";
     static final String CLOUD = BACKGROUND_PACKAGE + "cloud.png";
+    static final String CLOUD_ORIGINAL = BACKGROUND_PACKAGE + "cloudOriginal.png";
 }
