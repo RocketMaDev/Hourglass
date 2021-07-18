@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,7 +24,10 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(
                 Objects.requireNonNull(getClass().getResource(MainWindowFXML))
         );
-        primaryStage.setScene(new Scene(root,800,600));
+        primaryStage.setTitle("倒计时");
+        primaryStage.getIcons().add(new Image(StaticVariables.HOURGLASS_ICON));
+        primaryStage.setOnCloseRequest(event -> System.exit(1));
+        primaryStage.setScene(new Scene(root, 1200, 670));
         primaryStage.show();
     }
 
