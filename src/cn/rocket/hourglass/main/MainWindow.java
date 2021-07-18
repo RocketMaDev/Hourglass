@@ -160,13 +160,13 @@ public class MainWindow {
         start.setLayoutX((width - start.getWidth()) / 2);
 
         double limitedWidth = width - 2 * 380;
-        double spaceWidth = (limitedWidth - 6 * spring.getWidth())/5;
+        double spaceWidth = (limitedWidth - 6 * spring.getWidth()) / 5;
         spring.setLayoutX(380);
-        flower.setLayoutX(380+spring.getWidth()+spaceWidth);
-        autumn.setLayoutX(380+2*(spring.getWidth()+spaceWidth));
-        moon.setLayoutX(380+3*(spring.getWidth()+spaceWidth));
-        river.setLayoutX(380+4*(spring.getWidth()+spaceWidth));
-        cloud.setLayoutX(380+5*(spring.getWidth()+spaceWidth));
+        flower.setLayoutX(380 + spring.getWidth() + spaceWidth);
+        autumn.setLayoutX(380 + 2 * (spring.getWidth() + spaceWidth));
+        moon.setLayoutX(380 + 3 * (spring.getWidth() + spaceWidth));
+        river.setLayoutX(380 + 4 * (spring.getWidth() + spaceWidth));
+        cloud.setLayoutX(380 + 5 * (spring.getWidth() + spaceWidth));
     }
 
     @FXML
@@ -220,38 +220,45 @@ public class MainWindow {
     }
 
     private class Target implements Runnable {
+        private long endMillis;
+        private long currentMillis;
+        private long distance;
+
+        private boolean sleep() throws InterruptedException {
+            if (!timing)
+                return true;
+            Thread.sleep(1);
+            if (pauseB) {
+                distance = endMillis - currentMillis;
+                LockSupport.park();
+                endMillis = System.currentTimeMillis() + distance;
+            }
+            currentMillis = System.currentTimeMillis();
+            Platform.runLater(() -> lb.setText(String.format("%d.%03d", (endMillis - currentMillis) / 1000, (endMillis - currentMillis) % 1000)));
+            return false;
+        }
 
         @Override
         public void run() {
             long startMillis = System.currentTimeMillis();
             try {
-                for (int i = 15000; i >= 5000; i--) {
-                    if (!timing)
+//                    Platform.runLater(() -> lb.setText(String.format("%d.%03d", finalI / 1000, finalI % 1000)));
+                endMillis = System.currentTimeMillis() + 15000;
+                currentMillis = endMillis - 15000;
+                while (endMillis - currentMillis > 5000)
+                    if (sleep())
                         return;
-                    if (i % 3 != 0)
-                        Thread.sleep(1);
-                    int finalI = i;
-                    Platform.runLater(() -> lb.setText(String.format("%d.%03d", finalI / 1000, finalI % 1000)));
-                    if (pauseB)
-                        LockSupport.park();
-                }
                 Platform.runLater(() -> lb.setTextFill(Paint.valueOf("RED")));
-                for (int i = 5000; i >= 0; i--) {
-                    int finalI = i;
-                    if (!timing)
+                while (endMillis - currentMillis > 0)
+                    if (sleep())
                         return;
-                    if (i % 3 != 0)
-                        Thread.sleep(1);
-                    Platform.runLater(() -> lb.setText(String.format("%d.%03d", finalI / 1000, finalI % 1000)));
-                    if (pauseB)
-                        LockSupport.park();
-                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            long endMillis = System.currentTimeMillis();
-            System.out.println((endMillis - startMillis) / 1000.0);
+            long finalMillis = System.currentTimeMillis();
+            System.out.println((finalMillis - startMillis) / 1000.0);
             Platform.runLater(() -> {
+                lb.setText("0.000");
                 start.setVisible(true);
                 stop.setVisible(false);
                 pause.setVisible(false);
